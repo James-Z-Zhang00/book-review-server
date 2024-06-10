@@ -72,6 +72,29 @@ User authentication process:
 4. Once the username & password validated, the server will send JWT (JSON Web Token) to the request sender, the token will be valid in 60 minutes
 5. Now the user can pass the `customer/auth/*` middleware then access to authorization required routers
 
+Router to handle user registeration
+
+```js
+public_users.post("/register", (req,res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (username && password) {
+    // username validation
+    if (doesExist(username)) { 
+      return res.status(404).json({message: "Username already exists!"});   
+    } else {
+      users.push({"username":username,"password":password});
+      return res.status(200).json({message: "Customer successfully registred. Now you can login"});
+    }
+  } 
+  return res.status(404).json({message: "Unable to register user, both username and password must be filled!"});
+});
+```
+
+Postman (testing tool) screenshot, where username and password were sent by JSON
+
+
+
 After authentication, user can:
 1. Post new review for a book
 2. Update or delete an existing review that posted by the _same_ user previously
