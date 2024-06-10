@@ -18,6 +18,9 @@ Handle mostly **GET** requests and one **POST** request for registration.
 
 User without authentication can send http GET request to:
 - Get all books by `/` route
+- Get book by ISBN by `/isbn/:isbn` route
+- Get book by title by `/title/:title` route
+- Get book by author by `/author/:author` route
 
 ```js
 // Get the book list available in the shop
@@ -25,8 +28,6 @@ public_users.get('/',function (req, res) {
   res.send(JSON.stringify(books,null,4));
 });
 ```
-
-- Get book by ISBN by `/isbn/:isbn` route
 
 ```js
 // Get book details based on ISBN
@@ -38,8 +39,6 @@ public_users.get('/isbn/:isbn',function (req, res) {
  });
 ```
 
-- Get book by title by `/title/:title` route
-
 ```js
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
@@ -49,8 +48,6 @@ public_users.get('/title/:title',function (req, res) {
   res.send(booksString);
 });
 ```
-
-- Get book by author by `/author/:author` route
 
 ```js
 // Get book details based on author
@@ -93,7 +90,47 @@ public_users.post("/register", (req,res) => {
 
 Postman (testing tool) screenshot, where username and password were sent by JSON
 
+<img width="521" alt="register" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/d36e71cd-e439-4dbd-84cf-e2a2a0576da5">
 
+User authentication process
+
+```js
+//only registered users can login
+regd_users.post("/login", (req,res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+    if (authenticatedUser(username, password)) {
+    // If the username and password passed checking
+    currentUsername = username;
+    // Sign the JWT (JSON Web Token) to generate accessToken with the given username
+    // With 60 * 60 available time (1 hour)
+    let accessToken = jwt.sign({
+            data: username,
+        }, 'access', { expiresIn: 60 * 60 });
+
+        // Set the access token and username in the session
+        req.session.authorization = {
+            accessToken: accessToken,
+        };
+    // Return registeration successful message back to the user
+    return res.status(200).send("Customer successfully logged in\n");
+    }
+    // Return the failed login message back to the user
+    res.status(401).send("No such username and password combination!");
+});
+
+// Check if the user send correct username and password
+const authenticatedUser = (username,password)=>{ 
+  let validusers = users.filter((user)=>{
+    return (user.username === username && user.password === password)
+  });
+  if(validusers.length > 0){
+    return true;
+  } else {
+    return false;
+  }
+}
+```
 
 After authentication, user can:
 1. Post new review for a book
