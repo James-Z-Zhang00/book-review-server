@@ -132,6 +132,10 @@ const authenticatedUser = (username,password)=>{
 }
 ```
 
+Postman testing for user login
+
+<img width="549" alt="login" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/9d3437bd-a6a8-4810-aa47-d65aff7f2217">
+
 After authentication, user can:
 1. Post new review for a book
 2. Update or delete an existing review that posted by the _same_ user previously
