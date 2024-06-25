@@ -6,9 +6,9 @@ CRUD operations with authenication.
 
 ## Main Objective
 
-To figure out how the index.js gatekeeper authenication works, `auth_users.js` is responsable for username & password checking (login process).
+Develop a book review server that provides user authentication and authorization features `auth_users.js` is responsable for username & password checking (login process).
 
-Investigate the relationship between `index.js` and `auth_users.js`.
+Built a client side for sending dynamic HTTP requests by JavaScript Promise and async await Axios
 
 ## Side Features 
 
@@ -147,4 +147,7 @@ In the screenshot, I added review: good after successfully login to my account, 
 Then I'm able to delete the review by sending a delete request to the same URL
 
 <img width="1792" alt="9-deletereview" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/34f06a0c-54eb-42d5-b30b-61b7165a1684">
+
+## Client Side
+
 
