@@ -139,3 +139,12 @@ Postman testing for user login
 After authentication, user can:
 1. Post new review for a book
 2. Update or delete an existing review that posted by the _same_ user previously
+
+In the screenshot, I added review: good after successfully login to my account, there's a message shows that the review added.
+
+<img width="1792" alt="8-reviewadded" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/b9cd81cd-78ba-4e6b-8109-887b9ad91fcb">
+
+Then I'm able to delete the review by sending a delete request to the same URL
+
+<img width="1792" alt="9-deletereview" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/34f06a0c-54eb-42d5-b30b-61b7165a1684">
+
