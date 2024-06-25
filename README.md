@@ -148,6 +148,72 @@ Then I'm able to delete the review by sending a delete request to the same URL
 
 <img width="1792" alt="9-deletereview" src="https://github.com/James-Z-Zhang00/book-review-server/assets/144994336/34f06a0c-54eb-42d5-b30b-61b7165a1684">
 
-## Client Side
+## Client Side Feature Building
 
+Send get request to get all book records for the server using async await axios
+
+```JavaScript
+async function getAllBooks() {
+  try {
+    const response = await axios.get("http://localhost:5000/");
+    console.log(response.data);
+  } catch (error) {
+    console.error('Request failed: ', error.message);
+  }
+}
+```
+
+Send get request to get book by isbn number with an attribute by using JavaScript Promise and error handling
+
+```JavaScript
+function getBookByIsbn(isbn) {
+  return new Promise((resolve, reject) => {
+    fetch("http://localhost:5000/isbn/"+isbn)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json(); 
+      })
+      .then(data => resolve(data))
+      .catch(error => reject(error));
+  });
+}
+```
+
+Send get request to get book by author name with an attribute by using JavaScript Promise and error handling
+
+```JavaScript
+function getBookByAuthor(author) {
+  return new Promise((resolve, reject) => {
+    fetch("http://localhost:5000/author/"+author)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => resolve(data))
+      .catch(error => reject(error));
+  });
+}
+```
+
+Send get request to get book by book title with an attribute by using JavaScript Promise and error handling
+
+```JavaScript
+function getBookByTitle(title) {
+  return new Promise((resolve, reject) => {
+    fetch("http://localhost:5000/title/"+title)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => resolve(data))
+      .catch(error => reject(error));
+  });
+}
+```
 
